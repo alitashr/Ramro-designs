@@ -1,0 +1,22 @@
+.at-menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border-radius: 0.125rem;
+  line-height: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  -webkit-user-select: none;
+  user-select: none;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  width: 100%;
+}
+
+.rd-navItem {
+  padding: 2rem;
+  color: #d8d097;
+  color: var(--brand3);
+}
