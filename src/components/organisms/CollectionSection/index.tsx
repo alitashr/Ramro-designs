@@ -74,7 +74,7 @@ export default function CollectionSection (props: ICollectionSectionProps) {
           className={classNames("rd-section-textarea", { order1: textAtRight })}
         >
           <Heading>{mainHeading}</Heading>
-          <div className="rd-subheading">{subheading}</div>
+          <div className="at-heading rd-subheading">{subheading}</div>
           <div className="rd-subtext">{subtext}</div>
           <div className="rd-buttons-area">
           <Button className="rd-buttons" intent="primary">

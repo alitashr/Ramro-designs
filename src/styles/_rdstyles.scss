@@ -1,0 +1,57 @@
+
+body {
+  user-select: none;
+  margin: 0px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: "Noto Sans";
+  background: #0e0e0e;
+}
+
+button {
+  font-family: "Noto Sans";
+  font-size: 0.75rem;
+}
+a {
+  text-decoration: none;
+}
+
+.rd-subtext {
+  font-size: 1rem;
+  color: var(--pure-white);
+  line-height: 1.5rem;
+}
+.rd-buttons-area {
+  margin-top: 0.75rem;
+}
+.rd-footer {
+  height: 4rem;
+  text-align: center;
+  padding: 2rem 0;
+  &-texts {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: var(--brand3);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    margin-top: 0.5rem;
+    & > p {
+      cursor: pointer;
+      margin: 0 1rem;
+    }
+    & > p:hover {
+      color: var(--brand2);
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}

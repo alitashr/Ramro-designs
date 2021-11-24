@@ -4,20 +4,7 @@
 @import "./styles/variables";
 @import "./styles/mixins";
 
-
-body {
-  user-select: none;
-  margin: 0px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  font-family: "Noto Sans";
-}
-
-button {
-  font-family: "Noto Sans";
-  font-size: 0.75rem;
-}
+@import "./styles/rdstyles";
 
 @import "./components/atoms/Heading/Heading";
 @import "./components/atoms/NavItem/NavItem";

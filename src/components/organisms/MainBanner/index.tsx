@@ -2,6 +2,7 @@ import * as React from 'react';
 import Banner from '../../atoms/Banner';
 import { Button } from '../../atoms/Button';
 import Heading from "../../atoms/Heading";
+import {CDN_domain} from "../../../api/appProvider";
 
 export interface IMainBannerProps {
 }
@@ -10,8 +11,8 @@ export default function MainBanner (props: IMainBannerProps) {
   return (
     <div>
         <Banner
-       backgroundUrl={`url(${process.env.PUBLIC_URL +
-        "/assets/images/CoverImage.png"})`}
+       backgroundUrl={`url(${CDN_domain +
+        "/images/CoverImage.png"})`}
     >
       <div style={{ width: "37rem" }}>
       <Heading main>Designs for textiles</Heading>

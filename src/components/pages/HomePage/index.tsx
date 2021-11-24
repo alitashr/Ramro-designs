@@ -2,6 +2,11 @@ import * as React from "react";
 import HeaderNavbar from "../../organisms/HeaderNavbar";
 import MainBanner from "../../organisms/MainBanner";
 import CollectionSection from "../../organisms/CollectionSection";
+import { CDN_domain } from "../../../api/appProvider";
+import Banner from "../../atoms/Banner";
+import { Button } from "../../atoms/Button";
+import Footer from "../../organisms/Footer";
+
 export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
@@ -15,7 +20,7 @@ export default function HomePage(props: IHomePageProps) {
           mainHeading={"Elegant collection"}
           subtext={"Our collection of non-exclusive designs"}
           buttonText="Browse Elegant Collection"
-          backgroundUrl={`${process.env.PUBLIC_URL + "/assets/images/Cansus_Prense in bedroom arcadus.jpg"}`}
+          backgroundUrl={`${CDN_domain + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
         ></CollectionSection>
       }
 
@@ -27,9 +32,9 @@ export default function HomePage(props: IHomePageProps) {
           subtext={"SET OF 2-5 DESIGNS"}
           buttonText="Browse Bundles"
           backgroundUrlArr={[
-            `${process.env.PUBLIC_URL + "/assets/images/Bundle designs/Archelypse.thumb.jpg"}`,
-            `${process.env.PUBLIC_URL + "/assets/images/Bundle designs/Archelypse.1.thumb.jpg"}`,
-            `${process.env.PUBLIC_URL + "/assets/images/Bundle designs/Archelypse.2.thumb.jpg"}`,
+            `${CDN_domain + "/images/Bundle designs/Archelypse.thumb.jpg"}`,
+            `${CDN_domain + "/images/Bundle designs/Archelypse.1.thumb.jpg"}`,
+            `${CDN_domain + "/images/Bundle designs/Archelypse.2.thumb.jpg"}`,
           ]}
         ></CollectionSection>
       }
@@ -40,7 +45,7 @@ export default function HomePage(props: IHomePageProps) {
           mainHeading={"Seamless designs"}
           subtext={"Designs that can be seamlessly tiled over any product like fabric, wallpaper, table cloth, etc."}
           buttonText="Browse Seamless Designs"
-          backgroundUrl={`${process.env.PUBLIC_URL + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
+          backgroundUrl={`${CDN_domain + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
         ></CollectionSection>
       }
 
@@ -54,9 +59,31 @@ export default function HomePage(props: IHomePageProps) {
             "Each design in this collection can only be purchased once, after which it will only be available to the buyer."
           }
           buttonText="Sign in to view"
-          backgroundUrl={`${process.env.PUBLIC_URL + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
+          backgroundUrl={`${CDN_domain + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
         ></CollectionSection>
       }
+       {
+        <Banner
+          className="footer-banner"
+          backgroundUrl={`url(${CDN_domain +
+            "/images/FooterImage.png"})`}
+        >
+          <div style={{ width: "27rem" }}>
+            <div className="rd-subtext">
+              Download EXCLUSIVE AND NON-EXCLUSIVE samples to see what you get
+              on a purchase.
+            </div>
+            <div className="rd-buttons-area">
+              <Button className="rd-buttons" intent="primary">
+                {" "}
+                Download Samples
+              </Button>
+            </div>
+          </div>
+        </Banner>
+      }
+    <Footer/>
+
     </div>
   );
 }
