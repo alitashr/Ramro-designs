@@ -90,7 +90,7 @@ export default function CollectionSection (props: ICollectionSectionProps) {
               fitwidth={false}
               className="rd-section-image"
               onThumbnailClick={handleThumbClick}
-              showAsBg={true}
+              showAsBg={false}
             />
           )}
           {backgroundUrl === "" && backgroundUrlArr.length && (
@@ -106,7 +106,7 @@ export default function CollectionSection (props: ICollectionSectionProps) {
                     `bundleimage${index}`
                   )}
                   onThumbnailClick={handleThumbClick}
-                  showAsBg={true}
+                  showAsBg={false}
                 />
               ))}
             </div>

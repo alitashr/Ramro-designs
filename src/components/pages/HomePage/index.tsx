@@ -16,7 +16,7 @@ export default function HomePage(props: IHomePageProps) {
       <MainBanner></MainBanner>
       {
         <CollectionSection
-          className="rd-elegant-section"
+          className="singleImage rd-elegant-section"
           mainHeading={"Elegant collection"}
           subtext={"Our collection of non-exclusive designs"}
           buttonText="Browse Elegant Collection"
@@ -41,7 +41,7 @@ export default function HomePage(props: IHomePageProps) {
 
       {
         <CollectionSection
-          className="rd-seamless-section"
+          className="singleImage rd-seamless-section"
           mainHeading={"Seamless designs"}
           subtext={"Designs that can be seamlessly tiled over any product like fabric, wallpaper, table cloth, etc."}
           buttonText="Browse Seamless Designs"
@@ -51,7 +51,7 @@ export default function HomePage(props: IHomePageProps) {
 
       {
         <CollectionSection
-          className="rd-signature-section"
+          className="singleImage rd-signature-section"
           textAtRight={true}
           mainHeading={"Signature collection"}
           subheading={"EXCLUSIVE DESIGNS"}

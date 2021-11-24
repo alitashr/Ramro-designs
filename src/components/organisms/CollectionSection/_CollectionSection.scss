@@ -1,5 +1,5 @@
 .rd-section {
-  height: 25rem;
+  height: 16rem;
   background-color: var(--brand4);
   margin-top: 10rem;
   &-box {
@@ -12,7 +12,6 @@
     text-align: right;
     margin: auto;
     padding-right: 2rem;
-    width: 28rem;
     &.order1 {
       order: 1;
       padding-left: 2rem;
@@ -22,21 +21,37 @@
   }
   &-imagearea {
     position: relative;
-    width: 43rem;
   }
   & .thumb-image-container {
     height: 100%;
     background-size: cover;
+    
   }
   &-image {
     margin-top: -0.5rem;
     margin-bottom: -0.5rem;
+    //height: calc(100% + 1rem);
+    object-fit: cover;
     height: calc(100% + 1rem);
-    & img.fit-width {
-      max-width: 100%;
+    width: 100%;
+    
+    // & img.fit-width {
+    //   max-width: 100%;
+    // }
+    // & img.fit-height {
+    //   max-height: 100%;
+    // }
+  }
+  &.singleImage .thumb-image-container{
+    background: transparent;
+    &:before{
+      padding: 0;
     }
-    & img.fit-height {
-      max-height: 100%;
+    .thumb-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
     }
   }
 }
@@ -57,6 +72,10 @@
 .rd-bundles-section {
   .thumb-image-container {
     border-radius: 4px;
+    background: transparent;
+  }
+  .rd-section-imagearea{
+    width: 15rem;
   }
   .rd-section-image {
     position: absolute;
