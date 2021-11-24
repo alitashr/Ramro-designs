@@ -1,0 +1,137 @@
+.rd-section {
+  height: 25rem;
+  background-color: var(--brand4);
+  margin-top: 10rem;
+  &-box {
+    display: flex;
+    margin: auto;
+    height: 100%;
+    width: fit-content;
+  }
+  &-textarea {
+    text-align: right;
+    margin: auto;
+    padding-right: 2rem;
+    width: 28rem;
+    &.order1 {
+      order: 1;
+      padding-left: 2rem;
+      padding-right: 0;
+      text-align: left;
+    }
+  }
+  &-imagearea {
+    position: relative;
+    width: 43rem;
+  }
+  & .thumb-image-container {
+    height: 100%;
+    background-size: cover;
+  }
+  &-image {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    height: calc(100% + 1rem);
+    & img.fit-width {
+      max-width: 100%;
+    }
+    & img.fit-height {
+      max-height: 100%;
+    }
+  }
+}
+.rd-signature-section {
+  background-color: var(--pure-black);
+  margin-bottom: 10rem;
+  & h2.at-heading.rd-heading {
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: 4.0625rem;
+    margin: 0;
+  }
+  & .rd-subtext {
+    color: var(--brand1);
+    margin-top: 1rem;
+  }
+}
+.rd-bundles-section {
+  .thumb-image-container {
+    border-radius: 4px;
+  }
+  .rd-section-image {
+    position: absolute;
+    border-radius: 13px;
+    filter: drop-shadow(0px 7.91578px 23.7473px rgba(16, 22, 26, 0.2));
+    width: 41rem;
+    height: 90%;
+    &.bundleimage1 {
+      top: 1rem;
+      left: 1rem;
+    }
+    &.bundleimage2 {
+      top: 2rem;
+      left: 2rem;
+    }
+  }
+}
+
+.thumb-hidden {
+  display: none;
+}
+@media screen and (max-width: 1200px) {
+  .rd-section {
+    &-textarea {
+      width: 20rem;
+    }
+    &-imagearea {
+      width: 40rem;
+    }
+  }
+  .rd-bundles-section {
+    .rd-section-imagearea {
+      background-color: var(--brand5);
+    }
+    .rd-bundle-images {
+      height: 28rem;
+      width: 40rem;
+      margin: auto;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .rd-section-image {
+      width: 38rem;
+      height: auto;
+      max-height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .rd-section {
+    height: auto;
+    &-textarea {
+      width: 20rem;
+      order: 1;
+      padding: 2.875rem 1.5rem;
+      width: auto;
+      text-align: center;
+    }
+    &-imagearea {
+      width: 40rem;
+    }
+    &-box {
+      flex-direction: column;
+      width: 100%;
+      & > div {
+        width: 100%;
+      }
+    }
+    &-image {
+      margin: 0;
+      border-radius: 0;
+      & .thumb-image-container {
+        border-radius: 0;
+      }
+    }
+  }
+}

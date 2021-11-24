@@ -1,0 +1,533 @@
+$pt-font-size: 1rem;
+$pt-text-color: black;
+$pt-font-size-large: 1.25rem;
+$at-size: 1rem;
+$pt-border-radius: 0.25rem;
+$pt-button-height: 2 * $at-size;
+
+$pt-button-height-large: 2.5 * $at-size;
+$pt-icon-size-large: 1.25 * $at-size;
+
+$pt-button-height-small: 1.5 * $at-size;
+
+$button-border-width: 2px;
+$pt-icon-size-standard: $at-size * 1.5;
+$pt-icon-size-small: $at-size * 1.25;
+$button-padding: ($at-size / 4) $at-size * 0.75;
+$button-padding-small: 0 ($at-size * 0.75) !default;
+$button-padding-large: ($at-size / 2) ($at-size * 1.5) !default;
+$button-icon-spacing: ($pt-button-height - $pt-icon-size-standard) / 2 !default;
+$button-icon-spacing-large: ($pt-button-height-large - $pt-icon-size-large) / 2 !default;
+/*
+CSS `border` property issues:
+- An element can only have one border.
+- Borders can't stack with shadows.
+- Borders modify the size of the element they're applied to.
+- Border positioning requires the extra `box-sizing` property.
+
+`box-shadow` doesn't have these issues, we're using it instead of `border`.
+*/
+$button-box-shadow: inset 0 0 0 2px var(--text-primary-muted);
+
+$transparent: #00000000;
+
+// "intent": (default, hover, active, muted)
+$at-button-intents: (
+  "primary": (
+    var(--brand1),
+    var(--brand2),
+    var(--brand3),
+  ),
+  "success": (
+    $success3,
+    $success2,
+    $success1,
+  ),
+  "warning": (
+    $warning3,
+    $warning2,
+    $warning1,
+  ),
+  "danger": (
+    $danger3,
+    $danger2,
+    $danger1,
+  ),
+);
+
+@mixin pt-button-base() {
+  @include pt-flex-container(row, $button-icon-spacing, $inline: inline);
+  align-items: center;
+  justify-content: center;
+  & > .at-button-text {
+    margin: 0;
+  }
+  border: none;
+  border-radius: $pt-border-radius;
+  cursor: pointer;
+  padding: $button-padding;
+  vertical-align: middle;
+  text-align: left;
+  font-size: $pt-font-size;
+}
+
+@mixin pt-button-height($height) {
+  min-width: $height;
+  min-height: $height;
+}
+
+@mixin pt-button-height-large() {
+  @include pt-button-height($pt-button-height-large);
+  @include pt-flex-margin(row, $button-icon-spacing-large);
+  padding: $button-padding-large;
+  font-size: $pt-font-size-large;
+}
+
+@mixin pt-button-height-default() {
+  @include pt-button-height($pt-button-height);
+  padding: $button-padding;
+  & > .at-icon {
+    width: $pt-icon-size-standard;
+    height: $pt-icon-size-standard;
+  }
+}
+
+@mixin pt-button-height-small() {
+  @include pt-button-height($pt-button-height-small);
+  font-size: 0.875rem;
+  padding: $button-padding-small;
+  & > .at-icon {
+    width: $pt-icon-size-small;
+    height: $pt-icon-size-small;
+    & > svg {
+      width: $pt-icon-size-small;
+      height: $pt-icon-size-small;
+    }
+  }
+}
+
+@mixin pt-button() {
+  box-shadow: $layer-1;
+  color: var(--text-primary);
+  &:hover {
+    color: var(--text-primary-hover);
+    box-shadow: $layer-1;
+  }
+
+  &:active,
+  &.#{$ns1}-active {
+    color: var(--text-primary-active);
+    box-shadow: $layer-2;
+  }
+
+  &:disabled,
+  &.#{$ns1}-disabled {
+    @include pt-button-disabled();
+  }
+}
+
+@mixin pt-button-disabled() {
+  outline: none;
+  box-shadow: none;
+  cursor: not-allowed;
+  color: var(--text-primary-muted);
+}
+
+@mixin pt-button-intent($default-color, $hover-color, $active-color) {
+  $intent-box-shadow: inset 0 0 0 $button-border-width $default-color, $layer-1;
+  $intent-box-shadow-hover: inset 0 0 0 $button-border-width $hover-color, $layer-1;
+  $intent-box-shadow-active: inset 0 0 0 $button-border-width $active-color, $layer-2;
+  box-shadow: $intent-box-shadow;
+  background-color: $default-color;
+  color: $white;
+  & > .at-button-text {
+    color: $white;
+    opacity: 1;
+  }
+
+  &:hover,
+  &:active,
+  &.#{$ns1}-active {
+    color: $white;
+    & > .at-button-text {
+      color: $white;
+    }
+  }
+
+  &:hover {
+    box-shadow: $intent-box-shadow-hover;
+    background-color: $hover-color;
+  }
+
+  &:active,
+  &.#{$ns1}-active {
+    box-shadow: $intent-box-shadow-active;
+    background-color: $active-color;
+  }
+
+  &:disabled,
+  &.#{$ns1}-disabled {
+    border-color: transparent;
+    box-shadow: none;
+    opacity: 0.5;
+    // background-color: $muted-color;
+    &:hover {
+      box-shadow: $intent-box-shadow;
+      background-color: $default-color;
+    }
+  }
+  &.#{$ns1}-tertiary {
+    @include pt-button-tertiary($default-color, $hover-color, $active-color);
+  }
+}
+@mixin pt-button-tertiary($default-color, $hover-color, $active-color) {
+  $intent-box-shadow: inset 0 0 0 $button-border-width $default-color;
+  $intent-box-shadow-hover: inset 0 0 0 $button-border-width $hover-color, $layer-1;
+  $intent-box-shadow-active: inset 0 0 0 $button-border-width $active-color, $layer-2;
+  box-shadow: $intent-box-shadow;
+  background-color: transparent;
+  color: $default-color;
+  & > .at-button-text {
+    color: $default-color;
+  }
+
+  &:active,
+  &.#{$ns1}-active {
+    box-shadow: $intent-box-shadow-active;
+    background-color: $active-color;
+  }
+  &:hover {
+    box-shadow: $intent-box-shadow-hover;
+    background-color: $hover-color;
+    color: $white;
+    & > .at-button-text {
+      color: $white;
+    }
+  }
+}
+@mixin pt-button-minimal() {
+  box-shadow: none;
+  color: var(--text-primary);
+  background-color: transparent;
+
+  &:hover {
+    background-color: var(--bg-primary-hover);
+    color: var(--text-primary-hover);
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.#{$ns1}-active {
+    background-color: var(--bg-primary-active);
+    color: var(--text-primary-active);
+  }
+
+  &:disabled,
+  &:disabled:hover,
+  &.#{$ns1}-disabled,
+  &.#{$ns1}-disabled:hover {
+    background: none;
+    cursor: not-allowed;
+    color: var(--text-primary-muted);
+    &.#{$ns1}-active {
+      background-color: var(--bg-primary-active);
+      color: var(--text-primary-active);
+    }
+  }
+  & > .bp3-heading {
+    opacity: 1;
+  }
+
+  @each $intent, $colors in $at-button-intents {
+    &.#{$ns1}-intent-#{$intent} {
+      @include pt-button-minimal-intent($colors...);
+    }
+  }
+}
+
+@mixin pt-button-minimal-intent($default-color, $hover-color, $active-color) {
+  color: $default-color;
+  & > .at-button-text {
+    color: $default-color;
+  }
+  &:hover,
+  &:active,
+  &.#{$ns1}-active {
+    box-shadow: none;
+    background: none;
+    color: $default-color;
+  }
+
+  &:hover {
+    color: $hover-color;
+    background-color: var(--bg-primary-hover);
+  }
+
+  &:active,
+  &.#{$ns1}-active {
+    color: $active-color;
+    background-color: var(--bg-primary-active);
+  }
+
+  &:disabled,
+  &.#{$ns1}-disabled {
+    background: none;
+  }
+
+  .#{$ns1}-button-spinner .#{$ns1}-spinner-head {
+    stroke: $default-color;
+  }
+}
+
+@mixin pt-button-minimal-divider() {
+  $divider-height: $pt-button-height * 2;
+
+  margin: ($pt-button-height - $divider-height) / 2;
+  background: $pt-divider-black;
+  width: $minimal-button-divider-width;
+}
+
+$ns1: at;
+.#{$ns1}-button {
+  @include pt-button-base();
+  @include pt-button-height-default();
+
+  &:empty {
+    // override padding from other modifiers (for CSS icon support)
+    // stylelint-disable-next-line declaration-no-important
+    padding: 0 !important;
+  }
+
+  &:disabled,
+  &.#{$ns1}-disabled {
+    cursor: not-allowed;
+  }
+
+  &.#{$ns1}-fill {
+    display: flex;
+    width: 100%;
+  }
+
+  &.#{$ns1}-align-right,
+  .#{$ns1}-align-right & {
+    text-align: right;
+  }
+
+  &.#{$ns1}-align-left,
+  .#{$ns1}-align-left & {
+    text-align: left;
+  }
+
+  // default styles
+  &:not([class*="#{$ns1}-intent-"]) {
+    @include pt-button();
+  }
+
+  // intents
+  @each $intent, $colors in $at-button-intents {
+    &.#{$ns1}-intent-#{$intent} {
+      @include pt-button-intent($colors...);
+    }
+  }
+
+  &[class*="#{$ns1}-intent-"] .#{$ns1}-button-spinner .#{$ns1}-spinner-head {
+    stroke: $white;
+  }
+
+  // size modifiers
+  &.#{$ns1}-large,
+  .#{$ns1}-large & {
+    @include pt-button-height-large();
+  }
+
+  &.#{$ns1}-small,
+  .#{$ns1}-small & {
+    @include pt-button-height-small();
+  }
+
+  // loading state
+  &.#{$ns1}-loading {
+    position: relative;
+
+    &[class*="#{$ns1}-icon-"]::before {
+      visibility: hidden;
+    }
+
+    .#{$ns1}-button-spinner {
+      // spinner appears centered within button
+      position: absolute;
+      margin: 0;
+    }
+
+    > :not(.#{$ns1}-button-spinner) {
+      visibility: hidden;
+    }
+  }
+
+  // #{$icon-classes} {
+  //   &.#{$ns1}-align-right {
+  //     margin-left: $button-icon-spacing;
+  //   }
+  // }
+
+  // button with SVG icon only (no text or children)
+  .#{$ns1}-icon:first-child:last-child,
+  // if loading, then it contains exactly [spinner, icon]
+  .#{$ns1}-spinner + .#{$ns1}-icon:last-child {
+    // center icon horizontally. this works for large buttons too.
+    margin: 0 (-($pt-button-height - $pt-icon-size-standard) / 2);
+  }
+
+  // disabled and intent button icon should use same color as text
+  // &:disabled,
+  // &.#{$ns1}-disabled,
+  // &[class*="#{$ns}-intent-"] {
+  //   &::before,
+  //   #{$icon-classes} {
+  //     // stylelint-disable-next-line declaration-no-important
+  //     color: inherit !important;
+  //   }
+  // }
+
+  // minimal must come last to override all default styles
+  &.#{$ns1}-minimal {
+    @include pt-button-minimal();
+  }
+  &.#{$ns1}-button-loading {
+  }
+}
+
+a.#{$ns1}-button {
+  text-align: center;
+  text-decoration: none;
+  transition: none;
+
+  &,
+  &:hover,
+  &:active {
+    // override global 'a' styles
+    color: $pt-text-color;
+  }
+
+  &.#{$ns1}-disabled {
+    // color: $button-color-disabled;
+  }
+}
+
+.#{$ns1}-button-text {
+  // default: don't grow to fill but allow shrinking as necessary
+  flex: 0 1 auto;
+}
+
+// when alignment is set, grow to fill and inherit `text-align` set on `.#{$ns}-button`
+.#{$ns1}-button,
+.#{$ns1}-button-group {
+  &.#{$ns1}-align-left,
+  &.#{$ns1}-align-right {
+    .#{$ns1}-button-text {
+      flex: 1 1 auto;
+    }
+  }
+}
+// .#{$ns1}-button{
+//   &>.#{$ns1}-icon{
+//     margin-right:0.25rem !important;
+//   }
+// }
+
+.disable {
+  pointer-events: none;
+}
+.at-input-btn-label {
+  position: relative;
+  padding: 0 $at-size;
+  & > button {
+    padding: 0;
+  }
+  &:after {
+    cursor: pointer;
+    position: absolute;
+    content: "";
+    // width: 100%;
+    // height: 100%;
+    background: transparent;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  &:hover {
+    background-color: var(--bg-primary-hover);
+    color: var(--text-primary-hover);
+    box-shadow: none;
+    text-decoration: none;
+    border-radius: 0.25rem;
+  }
+  &:active {
+    background-color: var(--bg-primary-active);
+    color: var(--text-primary-active);
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    background: none;
+    cursor: not-allowed;
+    color: var(--text-primary-muted);
+  }
+}
+.at-button {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 0.5rem 0.75rem;
+  
+  &.at-loading-button {
+    & > .at-spinner-border {
+      margin-right: 0.5rem;
+      margin-left: -0.5rem;
+      opacity: 0;
+    }
+    & > .at-button-text {
+      margin-left: -1rem;
+      transition: 0.5s;
+    }
+    &--isloading {
+      & > .at-spinner-border {
+        opacity: 1;
+      }
+      & > .at-button-text {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.at-button.at-intent-primary {
+  background-color: var(--brand1);
+  box-shadow: inset 0 0 0 2px var(--brand1), 0px 1px 1px rgba(16, 22, 26, 0.2),
+    0px 0px 0px;
+  margin: 0.125rem;
+  color: var(--brand4);
+  &:hover,
+  &:active {
+    background-color: var(--brand2);
+    box-shadow: inset 0 0 0 2px var(--brand2), 0px 1px 1px rgba(16, 22, 26, 0.2),
+      0px 0px 0px;
+    color: var(--brand4);
+  }
+}
+.at-button:not([class*="at-intent-"]) {
+  box-shadow: inset 0 0 0 2px var(--brand1), inset 0 -2px 0 rgba(0, 0, 0, 10%);
+  color: var(--brand1);
+  background: transparent;
+  margin: 0.125rem;
+  &:hover {
+    box-shadow: inset 0 0 0 2px var(--brand2), inset 0 -2px 0 rgba(0, 0, 0, 10%);
+    color: var(--brand2);
+    background: transparent;
+  }
+}

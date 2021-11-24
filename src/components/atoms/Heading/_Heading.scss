@@ -1,0 +1,11 @@
+
+.rd-heading {
+  margin: 0.5rem 0;
+  color: var(--brand1);
+  font-weight: bold;
+  &.main-heading{
+    font-size: 3rem;
+    line-height: 4rem;
+    
+  }
+}
