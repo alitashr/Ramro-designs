@@ -1,19 +1,45 @@
 import * as React from "react";
+import { useMount } from "react-use";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderNavbar from "../../organisms/HeaderNavbar";
 import MainBanner from "../../organisms/MainBanner";
 import CollectionSection from "../../organisms/CollectionSection";
-import { CDN_domain } from "../../../api/appProvider";
+import { CDN_domain, fetchApiKey, getApiKey } from "../../../api/appProvider";
 import Banner from "../../atoms/Banner";
 import { Button } from "../../atoms/Button";
 import Footer from "../../organisms/Footer";
 
+import { getDesignList } from "../../../redux";
+
 export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
+  const dispatch = useDispatch();
+  useMount(() => {
+    // window.flags = {};
+    // window.InterfaceElements = {};
+
+    let key = getApiKey();
+    if (key === "") {
+      fetchApiKey({ username: "o1dd", password: "oodd", encrypted: false })
+        .then((key) => {
+          console.log("Login -> key", key);
+          dispatch(getDesignList());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("Key ->", key);
+      dispatch(getDesignList());
+    }
+  });
+
   return (
     <div>
       <HeaderNavbar></HeaderNavbar>
       <MainBanner></MainBanner>
+
       {
         <CollectionSection
           className="singleImage rd-elegant-section"
@@ -62,16 +88,11 @@ export default function HomePage(props: IHomePageProps) {
           backgroundUrl={`${CDN_domain + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
         ></CollectionSection>
       }
-       {
-        <Banner
-          className="footer-banner"
-          backgroundUrl={`url(${CDN_domain +
-            "/images/FooterImage.png"})`}
-        >
+      {
+        <Banner className="footer-banner" backgroundUrl={`url(${CDN_domain + "/images/FooterImage.png"})`}>
           <div style={{ width: "27rem" }}>
             <div className="rd-subtext">
-              Download EXCLUSIVE AND NON-EXCLUSIVE samples to see what you get
-              on a purchase.
+              Download EXCLUSIVE AND NON-EXCLUSIVE samples to see what you get on a purchase.
             </div>
             <div className="rd-buttons-area">
               <Button className="rd-buttons" intent="primary">
@@ -82,8 +103,7 @@ export default function HomePage(props: IHomePageProps) {
           </div>
         </Banner>
       }
-    <Footer/>
-
+      <Footer />
     </div>
   );
 }

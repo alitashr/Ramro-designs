@@ -1,7 +1,8 @@
 import * as React from 'react';
+import IPage from '../../../interfaces/page';
 
 
-export default function HelpPage () {
+export default function HelpPage (props: IPage) {
  
   return (
     <div>
