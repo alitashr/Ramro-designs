@@ -20,8 +20,10 @@ export default function HomePage(props: IHomePageProps) {
     // window.InterfaceElements = {};
 
     let key = getApiKey();
-    if (key === "") {
-      fetchApiKey({ username: "o1dd", password: "oodd", encrypted: false })
+    let page = sessionStorage.getItem('page')||'';
+
+    if (key === "" || page!=='ramro') {
+      fetchApiKey({ username: "ramro", password: "ramro20", encrypted: false })
         .then((key) => {
           console.log("Login -> key", key);
           dispatch(getDesignList());

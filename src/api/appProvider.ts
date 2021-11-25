@@ -87,7 +87,7 @@ export const login = () => {
     }
   });
 };
-export const fetchDesignList = ({struct}:{struct: boolean}) => {
+export const fetchDesignList = ({struct}:{struct: boolean}) =>  {
   //const { struct } = params;
   let data = new FormData();
   data.append("action", "designlist");
