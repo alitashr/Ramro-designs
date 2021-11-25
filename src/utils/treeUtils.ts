@@ -221,3 +221,50 @@ export function arrangeTree({
   }
 
 }
+
+
+export const updateSingleFileProp = (array:NodeType[], fileNode: fileItem) => {
+  const arr = [...array];
+  let done = false;
+  arr.forEach(function iter(a) {
+    if (done) return;
+    const files = a.files ||[];
+    files.forEach((file) => {
+      if (fileNode.fullPath === file.fullPath) {
+        file.thumbUrl = fileNode.thumbUrl;
+        file.designProps = fileNode.designProps;
+        return;
+      }
+    });
+    Array.isArray(a.children) && a.children.forEach(iter);
+  });
+  return arr;
+};
+
+
+export const getDesignThumbsToShow = (baseFolders:any[])=>{
+  let designsTreeToShow = baseFolders; // tree[0].children || [];
+    let designListArr: fileItem[]= [];
+    designsTreeToShow.forEach( (element:NodeType) => {
+      if(element.files && element.files.length>0){
+        const files = element.files;
+        const totalFilesInFolder = files.length;
+        const randomNumList:number[] = [];
+        for(var i=0; i<3; i++){
+          const getRandomNum = (): number=> {
+            const randomNumber = Math.round(Math.random()* (totalFilesInFolder-1));
+            if(randomNumList.indexOf(randomNumber)!==-1){
+              return getRandomNum()
+            }
+            else{
+              return randomNumber
+            }
+          }
+          const randomNum = getRandomNum();
+          designListArr.push(files[randomNum])
+        }
+      }
+      });
+      console.log("getDesignThumbsToShow -> designListArr", designListArr);
+      return designListArr;
+}

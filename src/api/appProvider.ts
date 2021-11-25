@@ -1,16 +1,31 @@
+import { fileItem } from "../interfaces/design";
 import HttpClient from "./httpClient";
 
 
 console.log("process.env.PUBLIC_URL.trim()", process.env.PUBLIC_URL.trim());
 export const CDN_domain = process.env.PUBLIC_URL.trim() !== "" ? process.env.PUBLIC_URL + "/" : "./assets";
-
-export const domain = "https://v3.explorug.com";
 let provider = "appproviderv3.aspx";
 const API_KEY = "apikey";
 let apikey:string;
+let cacheLocation: string = '';
+
+export const build = "v3";
+const REMOTE_SERVER = `https://${build}.explorug.com`;
+export const domain = REMOTE_SERVER;
+export const assetsDomain =
+  build === "v3" ? "https://d1tvaiszosdaib.cloudfront.net" : `${domain}/Assets`;
+
 
 const getCacheLocationFromUrl = (url: string) => url.split("/")[2];
-
+const processPath = (path:string, thumbFromCDN = true) => {
+  const s = path.split("/").map(encodeURIComponent);
+  if (s[1] === "Assets" && thumbFromCDN) {
+    const ss = s.slice(2);
+    return `${assetsDomain}/${ss.join("/")}`;
+  } else {
+    return `${domain}${path}`;
+  }
+};
 export const getApiKey = () => {
   if (!apikey) apikey = sessionStorage.getItem(API_KEY) || '';
   return apikey;
@@ -103,3 +118,28 @@ export const fetchDesignList = ({struct}:{struct: boolean}) =>  {
     })
   })
 };
+
+export const getDesignThumbnails = ({designs}: {designs:fileItem[]})=>{
+  const fullpaths = designs.map((item) => item.fullPath);
+  const thumbFromCDN = true;
+  const showThumbTexture = false;
+  let data = new FormData();
+  data.append("action", "designthumbs");
+  data.append("key", getApiKey());
+  data.append("files", JSON.stringify(fullpaths));
+  if (showThumbTexture) data.append("texture", '1');
+  return postWithRetry(data).then((thumbList:any)=>{
+    return designs.map((childFile)=>{
+      const item = thumbList.find((item:any) => item &&  item.Name === childFile.fullPath);
+      let add = {};
+      if (item) {
+        //const hash = MD5(JSON.stringify(item.Props));
+        const path = processPath(item.Thumb, thumbFromCDN);
+        let thumbUrl = `${path}`;
+        add = { thumbUrl, designProps: item.Props };
+        cacheLocation = getCacheLocationFromUrl(item.Thumb);
+      }
+      return { ...childFile, ...add };
+    })
+  })
+}

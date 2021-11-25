@@ -1,11 +1,12 @@
 import { Dispatch } from "redux";
 import { fetchDesignList } from "../../api/appProvider";
-import { ResponseNodeType } from "../../interfaces/design";
-import { arrangeTree } from "../../utils/treeUtils";
+import { fileItem, NodeType, ResponseNodeType } from "../../interfaces/design";
+import { arrangeTree, getDesignThumbsToShow, updateSingleFileProp } from "../../utils/treeUtils";
 
 export enum designActions {
   SET_TREE = "SET_TREE",
   SELECT_DESIGN = "SELECT_DESIGN",
+  UPDATE_FILE_PROP = "UPDATE_FILE_PROP",
 }
 
 const setDesignList = (payload: any) => {
@@ -14,7 +15,12 @@ const setDesignList = (payload: any) => {
     payload: payload,
   };
 };
-
+const updateFileProp = (payload: any) => {
+  return {
+    type: designActions.UPDATE_FILE_PROP,
+    payload: payload,
+  };
+};
 export const getDesignList = (initDesignPath = "") => {
   return (dispatch: Dispatch) => {
     fetchDesignList({ struct: true }).then((nestedDesignList: any | ResponseNodeType[]) => {
@@ -29,15 +35,36 @@ export const getDesignList = (initDesignPath = "") => {
       const tree = designTree?.copiedNode;
       const selectedFile = designTree?.selectedFile;
       const selectedFolder = designTree?.selectedFolder;
-      console.log("fetchDesignList -> tree", tree)
-     
-      dispatch(
-        setDesignList({
-          tree: tree,
-          selectedFolder,
-          selectedFile,
-        })
-      );
+      console.log("fetchDesignList -> tree", tree);
+      let designCarouselList:any[];
+
+      if(tree){
+        designCarouselList = getDesignThumbsToShow(tree[0].children);
+        dispatch(
+          setDesignList({
+            tree: tree,
+            selectedFolder,
+            selectedFile,
+            designCarouselList: designCarouselList
+          })
+        );
+      }
+      else{
+        dispatch(
+          setDesignList({
+            tree: tree,
+            selectedFolder,
+            selectedFile
+          })
+        );
+      }
+
+      
     });
+  };
+};
+export const UpdateDesignFileProp = (payload:any) => {
+  return (dispatch: Dispatch) => {
+    dispatch(updateFileProp(payload));
   };
 };

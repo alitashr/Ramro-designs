@@ -8,12 +8,16 @@ import { CDN_domain, fetchApiKey, getApiKey } from "../../../api/appProvider";
 import Banner from "../../atoms/Banner";
 import { Button } from "../../atoms/Button";
 import Footer from "../../organisms/Footer";
+import DesignsCarousel from "../../organisms/DesignsCarousel";
 
 import { getDesignList } from "../../../redux";
+import {RootReducerState} from "../../../redux";
 
 export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
+  const tree = useSelector((state: RootReducerState)=> state.design?.tree)
+ 
   const dispatch = useDispatch();
   useMount(() => {
     // window.flags = {};
@@ -32,16 +36,24 @@ export default function HomePage(props: IHomePageProps) {
           console.log(err);
         });
     } else {
-      console.log("Key ->", key);
-      dispatch(getDesignList());
+      console.log("Key from session ->", key, tree);
+      if(!tree){
+        dispatch(getDesignList());
+
+      }
     }
   });
+  
 
   return (
     <div>
       <HeaderNavbar></HeaderNavbar>
       <MainBanner></MainBanner>
-
+      {
+        tree && (
+          <DesignsCarousel tree={tree}></DesignsCarousel>
+        )
+      }
       {
         <CollectionSection
           className="singleImage rd-elegant-section"

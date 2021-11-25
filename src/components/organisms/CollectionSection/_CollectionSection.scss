@@ -7,11 +7,13 @@
     margin: auto;
     height: 100%;
     width: fit-content;
+    justify-content: center;
   }
   &-textarea {
     text-align: right;
-    margin: auto;
     padding-right: 2rem;
+    max-width: 30rem;
+    align-self: center;
     &.order1 {
       order: 1;
       padding-left: 2rem;
