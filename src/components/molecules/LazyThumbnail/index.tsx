@@ -12,7 +12,7 @@ export interface ILazyThumbnailProps {
   className  ?:string
 }
 
-export default function LazyThumbnail (props: ILazyThumbnailProps) {
+export default function LazyThumbnail (props: ILazyThumbnailProps & Record<string, any>) {
   const { node, onThumbnailClick, ...otherProps } = props;
   const dispatch = useDispatch();
  

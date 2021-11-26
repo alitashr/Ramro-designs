@@ -12,6 +12,7 @@ export interface IThumbnailProps {
   imageRotated ?: boolean;
   aspect ?: string;
   showTitle?: boolean;
+  showPrice ?:boolean;
   fitwidth?: boolean;
   active?: boolean;
   showAsBg?: boolean;
@@ -25,6 +26,7 @@ export default function Thumbnail(props: IThumbnailProps) {
     imageRotated,
     aspect = "portrait",
     showTitle = false,
+    showPrice = false,
     fitwidth = true,
     active,
     showAsBg = false,
@@ -110,6 +112,13 @@ export default function Thumbnail(props: IThumbnailProps) {
           {rendername(name)}
         </span>
       )}
+      {
+        showPrice && (
+          <span className="thumb-price">
+            80
+          </span>
+        )
+      }
     </div>
   );
 }
