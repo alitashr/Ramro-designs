@@ -3,14 +3,13 @@ import { useMount } from "react-use";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderNavbar from "../../organisms/HeaderNavbar";
 
-import { CDN_domain, fetchApiKey, getApiKey } from "../../../api/appProvider";
+import { fetchApiKey, getApiKey } from "../../../api/appProvider";
 
 import Footer from "../../organisms/Footer";
 
 import { getDesignList } from "../../../redux";
 import { RootReducerState } from "../../../redux";
-import { Params, RouterProps, useParams } from "react-router";
-import { useSearchParams } from "react-router-dom";
+import { Params, useParams } from "react-router";
 import HomePage from "../HomePage";
 import ElegantPage from "../ElegantPage";
 import SignaturePage from "../SignaturePage";

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import SamplesBanner from '../../organisms/SamplesBanner';
 
 export interface ISignaturePageProps {

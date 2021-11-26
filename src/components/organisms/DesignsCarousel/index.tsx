@@ -1,19 +1,13 @@
-import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { fileItem, NodeType } from "../../../interfaces/design";
 import { RootReducerState } from "../../../redux";
 import LazyThumbnail from "../../molecules/LazyThumbnail";
 import {
-  List,
   AutoSizer,
   Grid,
   CellMeasurer,
   CellMeasurerCache,
-  GridCellRenderer,
-  ListRowRenderer,
   ListRowProps,
-  CellRenderer,
-  CellMeasurerProps,
   GridCellProps,
 } from "react-virtualized";
 export interface IDesignsCarouselProps {
@@ -40,7 +34,6 @@ const ThumbFile = (props: IThumbFileProps) => {
 };
 
 export default function DesignsCarousel(props: IDesignsCarouselProps) {
-  //const [DesignThumblist, setDesignThumblist] = React.useState<fileItem[]>([]);
 
   const designCarouselList = useSelector((state: RootReducerState) => state.design?.designCarouselList);
 

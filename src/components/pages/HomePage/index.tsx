@@ -1,47 +1,16 @@
-import * as React from "react";
-import { useMount } from "react-use";
-import { useDispatch, useSelector } from "react-redux";
-import HeaderNavbar from "../../organisms/HeaderNavbar";
+import { useSelector } from "react-redux";
+
 import MainBanner from "../../organisms/MainBanner";
 import CollectionSection from "../../organisms/CollectionSection";
-import { CDN_domain, fetchApiKey, getApiKey } from "../../../api/appProvider";
+import { CDN_domain } from "../../../api/appProvider";
 import SamplesBanner from "../../organisms/SamplesBanner";
-import Footer from "../../organisms/Footer";
 import DesignsCarousel from "../../organisms/DesignsCarousel";
-
-import { getDesignList } from "../../../redux";
 import { RootReducerState } from "../../../redux";
 
 export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
   const tree = useSelector((state: RootReducerState) => state.design?.tree);
-
-  // const dispatch = useDispatch();
-  // useMount(() => {
-  //   // window.flags = {};
-  //   // window.InterfaceElements = {};
-
-  //   let key = getApiKey();
-  //   let page = sessionStorage.getItem("page") || "";
-
-  //   if (key === "" || page !== "ramro") {
-  //     fetchApiKey({ username: "ramro", password: "ramro20", encrypted: false })
-  //       .then((key) => {
-  //         console.log("Login -> key", key);
-  //         dispatch(getDesignList());
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } else {
-  //     console.log("Key from session ->", key, tree);
-  //     if (!tree) {
-  //       dispatch(getDesignList());
-  //     }
-  //   }
-  // });
-
   return (
     <div>
       <MainBanner></MainBanner>
