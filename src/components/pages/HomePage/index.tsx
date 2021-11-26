@@ -5,28 +5,27 @@ import HeaderNavbar from "../../organisms/HeaderNavbar";
 import MainBanner from "../../organisms/MainBanner";
 import CollectionSection from "../../organisms/CollectionSection";
 import { CDN_domain, fetchApiKey, getApiKey } from "../../../api/appProvider";
-import Banner from "../../atoms/Banner";
-import { Button } from "../../atoms/Button";
+import SamplesBanner from "../../organisms/SamplesBanner";
 import Footer from "../../organisms/Footer";
 import DesignsCarousel from "../../organisms/DesignsCarousel";
 
 import { getDesignList } from "../../../redux";
-import {RootReducerState} from "../../../redux";
+import { RootReducerState } from "../../../redux";
 
 export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
-  const tree = useSelector((state: RootReducerState)=> state.design?.tree)
- 
+  const tree = useSelector((state: RootReducerState) => state.design?.tree);
+
   const dispatch = useDispatch();
   useMount(() => {
     // window.flags = {};
     // window.InterfaceElements = {};
 
     let key = getApiKey();
-    let page = sessionStorage.getItem('page')||'';
+    let page = sessionStorage.getItem("page") || "";
 
-    if (key === "" || page!=='ramro') {
+    if (key === "" || page !== "ramro") {
       fetchApiKey({ username: "ramro", password: "ramro20", encrypted: false })
         .then((key) => {
           console.log("Login -> key", key);
@@ -37,22 +36,18 @@ export default function HomePage(props: IHomePageProps) {
         });
     } else {
       console.log("Key from session ->", key, tree);
-      if(!tree){
+      if (!tree) {
         dispatch(getDesignList());
-
       }
     }
   });
-  
 
   return (
     <div>
       <HeaderNavbar></HeaderNavbar>
       <MainBanner></MainBanner>
-      {
-        tree && (
-          <DesignsCarousel tree={tree}></DesignsCarousel>
-        )
+      {tree && 
+      <DesignsCarousel tree={tree}></DesignsCarousel>
       }
       {
         <CollectionSection
@@ -102,21 +97,7 @@ export default function HomePage(props: IHomePageProps) {
           backgroundUrl={`${CDN_domain + "/images/Cansus_Prense in bedroom arcadus.jpg"}`}
         ></CollectionSection>
       }
-      {
-        <Banner className="footer-banner" backgroundUrl={`url(${CDN_domain + "/images/FooterImage.png"})`}>
-          <div style={{ width: "27rem" }}>
-            <div className="rd-subtext">
-              Download EXCLUSIVE AND NON-EXCLUSIVE samples to see what you get on a purchase.
-            </div>
-            <div className="rd-buttons-area">
-              <Button className="rd-buttons" intent="primary">
-                {" "}
-                Download Samples
-              </Button>
-            </div>
-          </div>
-        </Banner>
-      }
+      <SamplesBanner />
       <Footer />
     </div>
   );

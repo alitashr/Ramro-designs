@@ -93,3 +93,23 @@ $grid-gutter-width:0;
     transform: rotateZ(90deg);
   }
 }
+
+
+.bp3-skeleton {
+  animation: 1000ms linear infinite alternate skeleton-glow;
+  background: rgba(211, 216, 219, 0.2);
+  background-clip: padding-box !important;
+  border-color: rgba(211, 216, 219, 0.2) !important;
+  border-radius: 2px;
+  box-shadow: none !important;
+  color: transparent !important;
+  cursor: default;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  & *,
+  &:after,
+  &:before {
+    visibility: hidden !important;
+  }
+}
