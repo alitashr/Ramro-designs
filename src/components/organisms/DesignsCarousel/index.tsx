@@ -60,9 +60,9 @@ export default function DesignsCarousel(props: IDesignsCarouselProps) {
     );
   };
 
-  const  cellRenderer =  (props:GridCellProps) =>{
-    const content=<p>testing</p> // Derive this from your data somehow
-  
+  const cellRenderer = (props: GridCellProps) => {
+    const content = <p>testing</p>; // Derive this from your data somehow
+
     return (
       <CellMeasurer
         cache={cache}
@@ -75,64 +75,71 @@ export default function DesignsCarousel(props: IDesignsCarouselProps) {
           style={{
             ...props.style,
             height: 35,
-            whiteSpace: 'nowrap'
+            whiteSpace: "nowrap",
           }}
         >
           {content}
         </div>
       </CellMeasurer>
     );
-  }
+  };
   return (
     <div className="designCarouselBox">
       {designCarouselList && designCarouselList.length ? (
         <>
- <AutoSizer className="autosizer">
-              {({ height, width }) => ( 
-                  <Grid
+          {/* <AutoSizer className="autosizer">
+            {({ height, width }) => {
+              const itemsPerRow = 1;
+
+              return (
+                <List
                   className="tree-node-list"
-                    cellRenderer= 
-                    //  {cellRenderer}
-                    {({ columnIndex, key, rowIndex, style }) => (
-                       <ThumbFile key={rowIndex} file={designCarouselList[columnIndex]} handleThumbnailClick={handleThumbnailClick} />
+                  width={window.innerWidth}
+                  height={300}
+                  rowHeight={100}
+                  rowRenderer={
+                    //renderRow
+                    ({ index, key, style }) => {
+                      return (
+                        <>
+                          {designCarouselList.map((node: fileItem, index: number) => (
+                            <ThumbFile key={index} file={node} handleThumbnailClick={handleThumbnailClick} />
+                          ))}
+                        </>
+                      );
+                    }
+                  }
+                  rowCount={1}
+                />
+              );
+            }}
+          </AutoSizer>
+           */}
+          <ul className="tree-node-list">
+            <>
+              <AutoSizer className="autosizer">
+                {({ height, width }) => (
+                  <Grid
+                    className="tree-node-list"
+                    cellRenderer={({ columnIndex, key, rowIndex, style }) => (
+                      <ThumbFile
+                        key={columnIndex}
+                        file={designCarouselList[columnIndex]}
+                        handleThumbnailClick={handleThumbnailClick}
+                      />
                     )}
                     columnCount={designCarouselList.length}
-                    columnWidth={window.innerWidth/designCarouselList.length}
-                    height={260}
+                    // columnWidth={100}
+                    columnWidth={window.innerWidth / designCarouselList.length}
+                    height={250}
                     rowCount={1}
-                    rowHeight={230}
-                    width={window.innerWidth}
+                    rowHeight={height}
+                    width={width}
                   />
-               )}
+                )}
               </AutoSizer>
- {/* <AutoSizer className="autosizer">
-                {({ height, width }) => (
-          <List className="tree-node-list" width={window.innerWidth} height={300} rowHeight={100} rowRenderer={renderRow} rowCount={designCarouselList.length} />
-                )}</AutoSizer> */}
-          {/* <ul className="tree-node-list">
-        {designCarouselList.map((node: fileItem, index: number) => (
-        //     <>
-        //       <AutoSizer className="autosizer">
-        //         {({ height, width }) => (
-        //           <Grid
-        //             cellRenderer={({ columnIndex, key, rowIndex, style }) => (
-        //               <ThumbFile key={index} file={node} handleThumbnailClick={handleThumbnailClick} />
-        //             )}
-        //             columnCount={12}
-        //             columnWidth={100}
-        //             height={300}
-        //             rowCount={1}
-        //             rowHeight={height}
-        //             width={width}
-        //           />
-        //         )}
-        //       </AutoSizer>
-              
-        //       ,
-        //     </>
-        //   ))}
-        // </ul>
-         */}
+            </>
+          </ul>
         </>
       ) : null}
     </div>
