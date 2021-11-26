@@ -5,12 +5,18 @@ import HelpPage from "../components/pages/Help";
 import AboutPage from "../components/pages/About";
 import ElegantPage  from "../components/pages/ElegantPage";
 import SignaturePage from "../components/pages/SignaturePage";
+import EntryPage from "../components/pages/EntryPage";
 
 const routes: IRoute[]=[
   {
     path: '/',
+    name: 'Entry Page',
+    component: EntryPage
+  },
+  {
+    path: '/:page',
     name: 'Home Page',
-    component: HomePage
+    component: EntryPage
   },
   {
     path: '/faq',
@@ -33,14 +39,14 @@ const routes: IRoute[]=[
     component: AboutPage,
   },
   {
-    path: '/elegant',
+    path: '/:elegant',
     name: 'Elegant Designs',
-    component: ElegantPage,
+    component: EntryPage,
   },
   {
-    path: '/signature',
+    path: '/:signature',
     name: 'Signature Designs',
-    component: SignaturePage,
+    component: EntryPage,
   },
   
 ]

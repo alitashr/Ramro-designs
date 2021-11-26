@@ -9,13 +9,13 @@ const Navbar = (props: NavBarProps) => {
   const { className } = props;
   return (
     <ul className={classNames("rd-menu", className)}>
-      <Link to ="/">
+      <Link to ="/:home">
       <NavItem text="Home" className="rd-navItem"></NavItem>
       </Link>
-      <Link to="/elegant">
+      <Link to="/:elegant">
       <NavItem text="Elegant Collection" className="rd-navItem"></NavItem>
       </Link>
-      <Link to="/signature">
+      <Link to="/:signature">
       <NavItem text="Signature Collection" className="rd-navItem"></NavItem>
       </Link>
       <Link to="/faq">

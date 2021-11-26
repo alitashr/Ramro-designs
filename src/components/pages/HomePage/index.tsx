@@ -17,34 +17,33 @@ export interface IHomePageProps {}
 export default function HomePage(props: IHomePageProps) {
   const tree = useSelector((state: RootReducerState) => state.design?.tree);
 
-  const dispatch = useDispatch();
-  useMount(() => {
-    // window.flags = {};
-    // window.InterfaceElements = {};
+  // const dispatch = useDispatch();
+  // useMount(() => {
+  //   // window.flags = {};
+  //   // window.InterfaceElements = {};
 
-    let key = getApiKey();
-    let page = sessionStorage.getItem("page") || "";
+  //   let key = getApiKey();
+  //   let page = sessionStorage.getItem("page") || "";
 
-    if (key === "" || page !== "ramro") {
-      fetchApiKey({ username: "ramro", password: "ramro20", encrypted: false })
-        .then((key) => {
-          console.log("Login -> key", key);
-          dispatch(getDesignList());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      console.log("Key from session ->", key, tree);
-      if (!tree) {
-        dispatch(getDesignList());
-      }
-    }
-  });
+  //   if (key === "" || page !== "ramro") {
+  //     fetchApiKey({ username: "ramro", password: "ramro20", encrypted: false })
+  //       .then((key) => {
+  //         console.log("Login -> key", key);
+  //         dispatch(getDesignList());
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   } else {
+  //     console.log("Key from session ->", key, tree);
+  //     if (!tree) {
+  //       dispatch(getDesignList());
+  //     }
+  //   }
+  // });
 
   return (
     <div>
-      <HeaderNavbar></HeaderNavbar>
       <MainBanner></MainBanner>
       {tree && 
       <DesignsCarousel tree={tree}></DesignsCarousel>
@@ -98,7 +97,6 @@ export default function HomePage(props: IHomePageProps) {
         ></CollectionSection>
       }
       <SamplesBanner />
-      <Footer />
     </div>
   );
 }
