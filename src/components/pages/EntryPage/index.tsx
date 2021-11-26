@@ -51,16 +51,12 @@ export default function EntryPage() {
     switch (page) {
       case ":home":
         return <HomePage />;
-
       case ":elegant":
         return <ElegantPage />;
-
       case ":signature":
         return <SignaturePage />;
-
       case "":
         return <HomePage />;
-
       default:
         break;
     }
@@ -69,7 +65,7 @@ export default function EntryPage() {
   return (
     <div>
       <HeaderNavbar></HeaderNavbar>
-      {renderPage(params)}
+      {tree && renderPage(params)}
       <Footer />
     </div>
   );

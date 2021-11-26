@@ -268,3 +268,36 @@ export const getDesignThumbsToShow = (baseFolders:any[])=>{
       console.log("getDesignThumbsToShow -> designListArr", designListArr);
       return designListArr;
 }
+
+
+
+export const getAllDesignsOnly = (baseFolders:any[])=>{
+  let AllDesigns = baseFolders; // tree[0].children || [];
+    let designListArr: fileItem[]= [];
+    AllDesigns.forEach( (element:NodeType) => {
+      if(element.files && element.files.length>0){
+        const files = element.files;
+        const totalFilesInFolder = files.length;
+
+        for(var i=0; i<totalFilesInFolder; i++){
+          designListArr.push(files[i])
+        }
+        // const randomNumList:number[] = [];
+        // for(var i=0; i<3; i++){
+        //   const getRandomNum = (): number=> {
+        //     const randomNumber = Math.round(Math.random()* (totalFilesInFolder-1));
+        //     if(randomNumList.indexOf(randomNumber)!==-1){
+        //       return getRandomNum()
+        //     }
+        //     else{
+        //       return randomNumber
+        //     }
+        //   }
+        //   const randomNum = getRandomNum();
+        //   designListArr.push(files[randomNum])
+        // }
+      }
+      });
+      console.log("getAllDesignsOnly -> getAllDesignsOnly", designListArr);
+      return designListArr;
+}
