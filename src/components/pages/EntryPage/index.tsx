@@ -13,6 +13,7 @@ import { Params, useParams } from "react-router";
 import HomePage from "../HomePage";
 import ElegantPage from "../ElegantPage";
 import SignaturePage from "../SignaturePage";
+import CartPage from "../CartPage";
 
 export interface IEntryPageProps {}
 
@@ -55,6 +56,8 @@ export default function EntryPage() {
         return <ElegantPage />;
       case ":signature":
         return <SignaturePage />;
+        case ":cart":
+          return <CartPage />;
       case "":
         return <HomePage />;
       default:

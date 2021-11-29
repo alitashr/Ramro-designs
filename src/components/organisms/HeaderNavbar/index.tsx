@@ -5,6 +5,7 @@ import Icon from "../../atoms/Icon";
 import { IconNames } from "../../atoms/Icon/icons";
 import classNames from "classnames";
 import { Button } from "../../atoms/Button";
+import { Link } from "react-router-dom";
 
 export interface IHeaderNavbarProps {}
 
@@ -30,7 +31,9 @@ export default function HeaderNavbar(props: IHeaderNavbarProps) {
         </div>
       }
       <div className="rd-cart-container">
+        <Link to="/:cart">
       <Button className="rd-cart-button">Empty Cart</Button>
+      </Link>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { fetchDesignList } from "../../api/appProvider";
-import { fileItem, NodeType, ResponseNodeType } from "../../interfaces/design";
-import { arrangeTree, getDesignThumbsToShow, updateSingleFileProp } from "../../utils/treeUtils";
+import { ResponseNodeType } from "../../interfaces/design";
+import { arrangeTree, getDesignThumbsToShow } from "../../utils/treeUtils";
 
 export enum designActions {
   SET_TREE = "SET_TREE",

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fileItem } from "../../../interfaces/design";
 import { RootReducerState } from "../../../redux";
 import { getAllDesignsOnly } from "../../../utils/treeUtils";
@@ -7,10 +7,13 @@ import Heading from "../../atoms/Heading";
 import LazyThumbnail from "../../molecules/LazyThumbnail";
 import SamplesBanner from "../../organisms/SamplesBanner";
 import {PaginationContainer} from "../../molecules/Pagination/PaginationContainer";
+import { AddToCart } from "../../../redux/Cart/cartActions";
 export interface IElegantPageProps {}
 
 export default function ElegantPage(props: IElegantPageProps) {
   const tree = useSelector((state: RootReducerState) => state.design?.tree);
+
+  const dispatch  =  useDispatch();
   const [designList, setDesignList] = useState<fileItem[]>([]);
   const [currentItems, setCurrentItems] = useState<fileItem[]>([]);
   
@@ -22,8 +25,9 @@ export default function ElegantPage(props: IElegantPageProps) {
 
     const itemOffset = 0;
     const endOffset = 1* itemsPerPage;
-    setCurrentItems(allDesigns.slice(itemOffset, endOffset));
-    
+    const items = allDesigns.slice(itemOffset, endOffset)
+    setCurrentItems(items);
+    dispatch(AddToCart(items.slice(0,3)));
 
   }, []);
 

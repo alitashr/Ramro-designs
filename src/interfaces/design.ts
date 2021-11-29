@@ -44,3 +44,7 @@ export interface NodeType {
   level: number;
   id: string;
 }
+
+export interface cartType{
+  designs:fileItem[] | null
+}
