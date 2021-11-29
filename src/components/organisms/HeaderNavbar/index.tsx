@@ -4,6 +4,7 @@ import Navbar from "../../molecules/Navbar";
 import Icon from "../../atoms/Icon";
 import { IconNames } from "../../atoms/Icon/icons";
 import classNames from "classnames";
+import { Button } from "../../atoms/Button";
 
 export interface IHeaderNavbarProps {}
 
@@ -28,6 +29,9 @@ export default function HeaderNavbar(props: IHeaderNavbarProps) {
           <Icon icon={IconNames.HAMBURGER_MENU} />
         </div>
       }
+      <div className="rd-cart-container">
+      <Button className="rd-cart-button">Empty Cart</Button>
+      </div>
     </header>
   );
 }
