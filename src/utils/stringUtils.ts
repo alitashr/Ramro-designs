@@ -1,3 +1,5 @@
+import {MD5} from "./md5";
+
 export const getPathOffile = (fileFullPath: string) => {
   const sp = fileFullPath.split("/");
   sp.pop();
@@ -7,4 +9,12 @@ export const getPathOffile = (fileFullPath: string) => {
 export const createUriSafe = (uriString : string) => {
   const enc = uriString.split("/").map(encodeURIComponent);
   return enc.join("/");
+};
+export const leftFillNum = (num:number, targetLength:number) => num.toString().padStart(targetLength, '0');
+
+export const convertTilePointToName = (i:number, j:number) => `${leftFillNum(i, 2)}_${leftFillNum(j, 2)}`;
+
+export const generateHash = (details:any, fullPath = "") => {
+  const des = JSON.stringify(details);
+  return MD5(des + fullPath);
 };
