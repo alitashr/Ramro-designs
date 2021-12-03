@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fileItem } from "../../../interfaces/design";
-import { RootReducerState } from "../../../redux";
+import { RootReducerState, setSelectedFile } from "../../../redux";
 import { getAllDesignsOnly } from "../../../utils/treeUtils";
 import Heading from "../../atoms/Heading";
 import LazyThumbnail from "../../molecules/LazyThumbnail";
 import SamplesBanner from "../../organisms/SamplesBanner";
 import {PaginationContainer} from "../../molecules/Pagination/PaginationContainer";
 import { AddToCart } from "../../../redux/Cart/cartActions";
+import FullDesignContainer from "../../organisms/FullDesignContainer";
+
 export interface IElegantPageProps {}
 
 export default function ElegantPage(props: IElegantPageProps) {
   const tree = useSelector((state: RootReducerState) => state.design?.tree);
+  const selectedFile = useSelector((state: RootReducerState) => state.design?.selectedFile);
 
   const dispatch  =  useDispatch();
   const [designList, setDesignList] = useState<fileItem[]>([]);
@@ -33,6 +36,8 @@ export default function ElegantPage(props: IElegantPageProps) {
 
   const handleThumbnailClick = (file: fileItem, activeVariation: fileItem) => {
     console.log("TCL: handleThumbnailClick -> file, activeVariation", file, activeVariation);
+    dispatch(setSelectedFile(file));
+
   };
   const handlePagination = (page: number)=>{
   console.log("handlePagination -> page", page);
@@ -60,7 +65,9 @@ const endOffset = itemOffset + itemsPerPage;
             })}
         </div>
         <PaginationContainer handlePagination={handlePagination}/>
-        
+        {
+          selectedFile && <FullDesignContainer selectedFile = {selectedFile}/>
+        }
       </div>
       Elegant page
       <SamplesBanner />

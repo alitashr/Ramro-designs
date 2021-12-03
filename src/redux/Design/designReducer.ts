@@ -6,7 +6,8 @@ import { updateSingleFileProp } from "../../utils/treeUtils";
 const initialState: DesignState = {
   tree: null,
   filteredTree: null,
-  designCarouselList:[]
+  designCarouselList:[],
+  selectedFile:null
 };
 interface Action {
   type: keyof designActions;
@@ -19,7 +20,10 @@ const designReducer = (state: DesignState = initialState, action: Action) => {
       return setDesignTree(state, payload);
     case designActions.UPDATE_FILE_PROP:
       return UpdateFileProp(state, payload);
+      case designActions.SELECT_DESIGN:
+      return {...state, selectedFile: payload}
     default:
+
       return state;
   }
 };

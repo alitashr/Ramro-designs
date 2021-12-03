@@ -143,3 +143,20 @@ export const getDesignThumbnails = ({designs}: {designs:fileItem[]})=>{
     })
   })
 }
+
+
+export const fetch1xFullDesign = (fileFullPath: string) =>  {
+  //const { struct } = params;
+  let data = new FormData();
+  data.append("action", "rendereddesign");
+  data.append("key", getApiKey());
+  data.append("file", fileFullPath);
+  return new Promise((resolve, reject)=>{
+    postHttpClient(data)
+    .then(resolve)
+    .catch((err)=>{
+      reject(err)
+    })
+  })
+};
+

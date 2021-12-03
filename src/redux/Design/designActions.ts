@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { fetchDesignList } from "../../api/appProvider";
-import { ResponseNodeType } from "../../interfaces/design";
+import { fileItem, ResponseNodeType } from "../../interfaces/design";
 import { arrangeTree, getDesignThumbsToShow } from "../../utils/treeUtils";
 
 export enum designActions {
@@ -21,6 +21,13 @@ const updateFileProp = (payload: any) => {
     payload: payload,
   };
 };
+const selectDesign = (payload:fileItem)=>{
+  return{
+    type: designActions.SELECT_DESIGN,
+    payload: payload
+  }
+}
+
 export const getDesignList = (initDesignPath = "") => {
   return (dispatch: Dispatch) => {
     fetchDesignList({ struct: true }).then((nestedDesignList: any | ResponseNodeType[]) => {
@@ -68,3 +75,9 @@ export const UpdateDesignFileProp = (payload:any) => {
     dispatch(updateFileProp(payload));
   };
 };
+
+export const setSelectedFile = (file: fileItem)=>{
+  return (dispatch: Dispatch)=>{
+    dispatch(selectDesign(file))
+  }
+}

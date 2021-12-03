@@ -22,7 +22,6 @@ export default function EntryPage() {
 
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
   useMount(() => {
     // window.flags = {};
     // window.InterfaceElements = {};

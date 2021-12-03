@@ -1,7 +1,8 @@
 export interface DesignState {
   tree: null,
   filteredTree: null,
-  designCarouselList: any[]
+  designCarouselList: any[],
+  selectedFile: null|fileItem
 }
 
 export interface fileItem {
