@@ -1,38 +1,18 @@
 import * as React from "react";
-import { CDN_domain, domain, fetch1xFullDesign, getRenderedDesign } from "../../../api/appProvider";
+import { CDN_domain } from "../../../api/appProvider";
 import { fileItem } from "../../../interfaces/design";
-import { getLogoCanvas } from "../../../utils/canvasUtils";
-import { generateHash } from "../../../utils/stringUtils";
-
+import DesignCanvas from "../../molecules/DesignCanvas";
+import DesignColorsContainer from "../../molecules/DesignColorsContainer";
+import CartOptions from "../../molecules/CartOptions";
 export interface IFullDesignContainerProps {
   selectedFile: fileItem;
 }
 
 export default function FullDesignContainer(props: IFullDesignContainerProps) {
   const { selectedFile } = props;
-  const fulldesignCanvasRef = React.useRef<HTMLCanvasElement>(null);
 
   React.useEffect(() => {
-    if (selectedFile && selectedFile.fullPath) {
-      const getRenderedDesignProps = {
-        fullpath: selectedFile.fullPath,
-        designDetails: selectedFile.designProps,
-        Width: selectedFile.designProps.Width,
-        Height: selectedFile.designProps.Height,
-        applyKLRatio: true,
-        zoom: 1,
-        hash: generateHash(selectedFile.designProps),
-
-        KLRatio: selectedFile.designProps.KLRatio,
-      };
-      getRenderedDesign(getRenderedDesignProps).then((designCanvas: any) => {
-        const canvas = document.getElementById("fulldesign-canvas") as HTMLCanvasElement;
-        canvas.width = designCanvas.width;
-        canvas.height = designCanvas.height;
-        const cxt = canvas.getContext("2d");
-        cxt?.drawImage(designCanvas, 0, 0, canvas.width, canvas.height);
-      });
-    }
+    
   }, [selectedFile]);
   return (
     <div className="rd-fulldesign-container">
@@ -47,9 +27,18 @@ export default function FullDesignContainer(props: IFullDesignContainerProps) {
       </div>
 
       <div className="rd-fulldesign-box">
-        <div className="rd-fulldesign">
-          <canvas id="fulldesign-canvas" ref={fulldesignCanvasRef} />
-        </div>
+        {
+          selectedFile && (
+          <><DesignCanvas selectedFile={selectedFile}/>
+
+          </>)
+        }
+        {
+          selectedFile && selectedFile.designProps && (
+            <DesignColorsContainer/>
+          )
+        }
+        <CartOptions/>
       </div>
     </div>
   );

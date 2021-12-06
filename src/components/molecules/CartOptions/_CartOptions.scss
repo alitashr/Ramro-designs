@@ -1,0 +1,25 @@
+.rd-cart-options {
+  display: flex;
+  align-self: flex-end;
+  height: 5rem;
+  color: #1b1b1b;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+  & > div {
+    display: flex;
+  padding: 0 1rem;
+
+  }
+  span {
+    display: flex;
+    align-self: center;
+  }
+}
+
+.rd-cart-options-buy {
+  background: #d2bd56;
+}
+.rd-cart-options-add {
+  background: #d7db97;
+}
