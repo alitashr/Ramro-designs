@@ -6,10 +6,16 @@
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.25;
+
   & > div {
     display: flex;
-  padding: 0 1rem;
-
+    padding: 0 1rem;
+    flex-direction: column;
+    justify-content: center;
+    &:hover {
+      background: #1a3e37;
+      color: white;
+    }
   }
   span {
     display: flex;

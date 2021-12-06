@@ -5,20 +5,51 @@
   left: 0;
   right: 0;
   background: hsla(0, 0%, 10%, 0.9);
+  display: flex;
 }
-.close-button {
+
+.rd-fulldesign-box {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  height: 90%;
+  align-items: center;
+  .rd-fulldesign {
+    width: auto;
+    height: 100%;
+  }
+  #fulldesign-canvas {
+    width: 100%;
+    height: 100%;
+  }
+  &-icons {
+    position: absolute;
+    top: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    width: 2rem;
+    opacity: 0.6;
+    max-height:3rem;
+    &:hover{
+      opacity: 1;
+    }
+    &.prev-button {
+      left: -2rem;
+      bottom: 0;
+    }
+    &.next-button {
+      right: -2rem;
+      bottom: 0;
+    }
+  }
+}
+
+.close-popup {
   color: rgb(255, 255, 255);
   cursor: pointer;
   position: absolute;
   right: -2rem;
-  padding: 0.5rem;
-}
-.rd-fulldesign-box{
-  display: flex;
-  .rd-fulldesign{
-    width: 20rem;
-  }
-  #fulldesign-canvas {
-    width: 100%;
-  }
+  width: 1.5rem;
 }

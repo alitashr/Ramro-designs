@@ -36,7 +36,7 @@ export default function DesignCanvas (props: IDesignCanvasProps) {
   }, [selectedFile]);
   return (
     <div className="rd-fulldesign">
-          <canvas id="fulldesign-canvas" ref={fulldesignCanvasRef} />
+          <canvas id="fulldesign-canvas" ref={fulldesignCanvasRef} width={900} height={1200} />
         </div>
   );
 }

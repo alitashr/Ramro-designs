@@ -6,39 +6,41 @@ import DesignColorsContainer from "../../molecules/DesignColorsContainer";
 import CartOptions from "../../molecules/CartOptions";
 export interface IFullDesignContainerProps {
   selectedFile: fileItem;
+  onClose: () => void;
+  onNavArrowClick: (direction: string) => void;
 }
 
 export default function FullDesignContainer(props: IFullDesignContainerProps) {
-  const { selectedFile } = props;
+  const { selectedFile, onClose, onNavArrowClick } = props;
 
-  React.useEffect(() => {
-    
-  }, [selectedFile]);
+  React.useEffect(() => {}, [selectedFile]);
+  const handleClose = () => {
+    if (onClose) onClose();
+  };
+  const onArrowClick = (direction: string) => {
+    if (onNavArrowClick) onNavArrowClick(direction);
+  };
   return (
     <div className="rd-fulldesign-container">
-      <div className="close-button">
-        <img alt="close button icon" src={`${CDN_domain}/icons/close.svg`} width="20" />
-      </div>
-      <div className="navIcons prev-button">
-        <img alt="prev button icon" src={`${CDN_domain}/icons/next.png`} width="20" />
-      </div>
-      <div className="navIcons next-button">
-        <img alt="next button icon" src={`${CDN_domain}/icons/prev.png`} width="20" />
-      </div>
-
       <div className="rd-fulldesign-box">
-        {
-          selectedFile && (
-          <><DesignCanvas selectedFile={selectedFile}/>
-
-          </>)
-        }
-        {
-          selectedFile && selectedFile.designProps && (
-            <DesignColorsContainer/>
-          )
-        }
-        <CartOptions/>
+        <div className="rd-fulldesign-box-icons close-popup" onClick={handleClose}>
+          <img alt="close button icon" src={`${CDN_domain}/icons/closePopUp.png`} width="100%" />
+        </div>
+        <div className="rd-fulldesign-box-icons navIcons next-button" onClick={() => onArrowClick("next")}>
+          <img alt="prev button icon" src={`${CDN_domain}/icons/next.png`} width="100%" />
+        </div>
+        <div className="rd-fulldesign-box-icons navIcons prev-button" onClick={() => onArrowClick("prev")}>
+          <img alt="next button icon" src={`${CDN_domain}/icons/prev.png`} width="100%" />
+        </div>
+        {selectedFile && (
+          <>
+            <DesignCanvas selectedFile={selectedFile} />
+          </>
+        )}
+        {selectedFile && selectedFile.designProps && (
+          <DesignColorsContainer designColors={selectedFile.designProps.DesignColors} />
+        )}
+        <CartOptions />
       </div>
     </div>
   );

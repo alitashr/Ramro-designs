@@ -11,7 +11,8 @@ export default function CartOptions(props: ICartOptionsProps) {
         </span>
       </div>
       <div className="rd-cart-options-add">
-        <span>Add to cart</span>
+        <span>+</span>
+        <div>Cart</div>
       </div>
     </div>
   );
