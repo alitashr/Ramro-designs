@@ -9,4 +9,7 @@
 }
 .footer-banner {
   text-align: center;
+  &>div{
+    max-width: 80%;
+  }
 }

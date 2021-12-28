@@ -39,7 +39,7 @@ React.useEffect(()=>{
   }, [inView, node]);
  return (
         <div className="thumnail-container" ref={ref}>
-           <Thumbnail {...otherProps} thumb={node} onThumbnailClick={()=>handleThumbClick(node)} />
+           <Thumbnail {...otherProps}  thumb={node} onThumbnailClick={()=>handleThumbClick(node)} />
         </div>
     );
 }

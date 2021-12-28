@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
+import { getPriceFromPath } from "../../../utils/stringUtils";
 
 interface thumbType {
   thumbUrl?: string | undefined; 
@@ -16,6 +17,7 @@ export interface IThumbnailProps {
   fitwidth?: boolean;
   active?: boolean;
   showAsBg?: boolean;
+  price?:Number | string
 }
 
 export default function Thumbnail(props: IThumbnailProps) {
@@ -30,8 +32,10 @@ export default function Thumbnail(props: IThumbnailProps) {
     fitwidth = true,
     active,
     showAsBg = false,
+    price
   } = props;
-  const { thumbUrl, name } = thumb;
+  const { thumbUrl, name, fullPath } = thumb;
+  //console.log("Thumbnail -> thumb", thumb)
   const [isHovering, setIsHovering] = React.useState(false);
   const [isloading, setIsloading] = React.useState(true);
   const thumbImg = React.useRef<HTMLImageElement>(null);
@@ -115,7 +119,7 @@ export default function Thumbnail(props: IThumbnailProps) {
       {
         showPrice && (
           <span className="thumb-price">
-            80
+            {getPriceFromPath(fullPath)}
           </span>
         )
       }

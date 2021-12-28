@@ -1,9 +1,10 @@
 .rd-fulldesign-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 99;
   background: hsla(0, 0%, 10%, 0.9);
   display: flex;
 }
@@ -22,6 +23,7 @@
   #fulldesign-canvas {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
   &-icons {
     position: absolute;
@@ -31,8 +33,8 @@
     align-items: center;
     width: 2rem;
     opacity: 0.6;
-    max-height:3rem;
-    &:hover{
+    max-height: 3rem;
+    &:hover {
       opacity: 1;
     }
     &.prev-button {
@@ -42,6 +44,24 @@
     &.next-button {
       right: -2rem;
       bottom: 0;
+    }
+  }
+  .rd-LoadingOverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    & > img {
+      display: flex;
+      align-self: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      left: 0;
+      right: 0;
     }
   }
 }

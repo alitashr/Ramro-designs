@@ -5,10 +5,11 @@ import { generateHash } from '../../../utils/stringUtils';
 
 export interface IDesignCanvasProps {
   selectedFile: fileItem;
+  onLoadComplete?:Function
 }
 
 export default function DesignCanvas (props: IDesignCanvasProps) {
-  const { selectedFile } = props;
+  const { selectedFile, onLoadComplete } = props;
   const fulldesignCanvasRef = React.useRef<HTMLCanvasElement>(null);
 
   
@@ -31,6 +32,7 @@ export default function DesignCanvas (props: IDesignCanvasProps) {
         canvas.height = designCanvas.height;
         const cxt = canvas.getContext("2d");
         cxt?.drawImage(designCanvas, 0, 0, canvas.width, canvas.height);
+        if(onLoadComplete) onLoadComplete();
       });
     }
   }, [selectedFile]);

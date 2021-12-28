@@ -1,6 +1,9 @@
 .rd-designs-container-grid{
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  width: fit-content;
+  width: 100%;
   margin: auto;
+  & .thumb-item{
+    width: unset
+  }
 }

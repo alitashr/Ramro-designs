@@ -1,6 +1,7 @@
 $label-height: 1.5rem;
 $thumb-title-margin: 0.5rem;
 $grid-gutter-width: 0;
+$thumb-item-width: 10rem;
 .thumb-item {
   margin: 0.25rem;
   max-width: 100%;
@@ -9,7 +10,7 @@ $grid-gutter-width: 0;
   text-align: center;
   cursor: pointer;
   position: relative;
-  width: 10rem;
+  width: $thumb-item-width;
 }
 
 .close-button {
@@ -182,7 +183,6 @@ letter-spacing: 0.06em;
 
 /* RD / White */
 color: #FFFFFF;
-
 opacity: 0.8;
 
 /* Inside Auto Layout */
@@ -190,5 +190,5 @@ flex: none;
 order: 0;
 flex-grow: 0;
 margin: 0px 0px;
-
+justify-content: center;
 }
