@@ -25,6 +25,15 @@ export default function FullDesignContainer(props: IFullDesignContainerProps) {
   const onDesignImageLoadComplete = () => {
     setIsLoading(false);
   };
+  const handleBuy=()=>{
+    console.log("handleBuy -> ");
+    
+  
+  }
+  const handleCartAdd=()=>{
+    console.log("handleCartAdd -> ")
+  
+  }
   return (
     <div className="rd-fulldesign-container">
       <div className="rd-fulldesign-box">
@@ -45,7 +54,7 @@ export default function FullDesignContainer(props: IFullDesignContainerProps) {
         {selectedFile && selectedFile.designProps && (
           <DesignColorsContainer designColors={selectedFile.designProps.DesignColors} />
         )}
-        {selectedFile && (<CartOptions FullPath={selectedFile.fullPath}  />)}
+        {selectedFile && (<CartOptions FullPath={selectedFile.fullPath} handleBuy= {handleBuy} handleCartAdd={handleCartAdd} />)}
         {isLoading && (
           <div className="rd-LoadingOverlay">
             <img src={`${CDN_domain}/icons/loading.gif`} alt="loading gif" />

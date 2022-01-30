@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import * as React from "react";
 
 export interface ITogglerButtonsProps {
   wrapperClassName: string;
@@ -7,6 +6,7 @@ export interface ITogglerButtonsProps {
   ButtonTexts: string[];
   selectedButtonClass?: string;
   selectedButtonIndex: number | null;
+  onButtonClick?: (index:number) => void;
 }
 
 export default function TogglerButtons(props: ITogglerButtonsProps) {
@@ -16,6 +16,7 @@ export default function TogglerButtons(props: ITogglerButtonsProps) {
     ButtonTexts,
     selectedButtonClass,
     selectedButtonIndex,
+    onButtonClick
   } = props;
 
   return (
@@ -24,6 +25,7 @@ export default function TogglerButtons(props: ITogglerButtonsProps) {
         <div
           key={index}
           className={classNames(className, "rd-button-text", { selected: index === selectedButtonIndex })}
+          onClick={()=>{if(onButtonClick) onButtonClick(index)}}
         >
           {ButtonText}
         </div>
