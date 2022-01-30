@@ -6,16 +6,26 @@ export enum cartActions{
   REMOVE_FROM_CART= "REMOVE_FROM_CART"
 }
 
-const addToCart = (payload:fileItem[])=>{
+const _addToCart = (payload:fileItem)=>{
    return {
      type: cartActions.ADD_TO_CART,
      payload: payload
    }
 }
-
-export const AddToCart = (cartItems: fileItem[])=>{
-console.log("AddToCart -> cartItems", cartItems)
-  return (dispatch: Dispatch)=>{
-    dispatch(addToCart(cartItems))
+const _removeFromCart = (payload:fileItem)=>{
+  return {
+    type: cartActions.REMOVE_FROM_CART,
+    payload: payload
   }
+}
+export const AddToCart = (payload:any) => {
+  return (dispatch: Dispatch) => {
+    dispatch(_addToCart(payload));
+  };
+};
+
+export const RemoveFromCart = (fileItem: fileItem)=>{
+  return (dispatch: Dispatch) => {
+    dispatch(_removeFromCart(fileItem));
+  };
 }

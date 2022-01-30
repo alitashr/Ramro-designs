@@ -316,6 +316,16 @@ export const filterDesigns = (AllDesigns: fileItem[], categoryFilterText: string
   return designListArr;
 };
 
+export const getPriceFromFullPath = (fullpath: string='')=>{
+  let price=0;
+  if(fullpath){
+    const folderName= fullpath.split('/')[1] || '';
+    const priceStr = folderName ? folderName.split(' ')[0]: '';
+    price = parseFloat(priceStr) ||0;
+  }
+  return price;
+}
+
 export const shuffle = (arra1: any[]) => {
   var ctr = arra1.length,
     temp,

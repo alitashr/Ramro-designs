@@ -3,6 +3,7 @@ import FaqPage from "../components/pages/FAQ";
 import HelpPage from "../components/pages/Help";
 import AboutPage from "../components/pages/About";
 import EntryPage from "../components/pages/EntryPage";
+import CartPage from "../components/pages/CartPage";
 
 const routes: IRoute[]=[
   {
@@ -14,6 +15,11 @@ const routes: IRoute[]=[
     path: '/:page',
     name: 'Home Page',
     component: EntryPage
+  },
+  {
+    path: '/:cart',
+    name: 'Cart Page',
+    component: CartPage
   },
   {
     path: '/faq',

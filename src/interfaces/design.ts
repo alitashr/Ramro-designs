@@ -47,5 +47,5 @@ export interface NodeType {
 }
 
 export interface cartType{
-  designs:fileItem[] | null
+  designs:fileItem[]
 }

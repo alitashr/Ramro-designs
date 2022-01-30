@@ -4,6 +4,10 @@ import { fileItem } from "../../../interfaces/design";
 import DesignCanvas from "../../molecules/DesignCanvas";
 import DesignColorsContainer from "../../molecules/DesignColorsContainer";
 import CartOptions from "../../molecules/CartOptions";
+import { AddToCart } from "../../../redux/Cart/cartActions";
+import { RootReducerState } from "../../../redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 export interface IFullDesignContainerProps {
   selectedFile: fileItem;
   onClose: () => void;
@@ -13,8 +17,9 @@ export interface IFullDesignContainerProps {
 export default function FullDesignContainer(props: IFullDesignContainerProps) {
   const { selectedFile, onClose, onNavArrowClick } = props;
   const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {}, [selectedFile]);
+  const cartItems = useSelector((state: RootReducerState) => state.cart?.designs);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
   const handleClose = () => {
     if (onClose) onClose();
   };
@@ -25,15 +30,22 @@ export default function FullDesignContainer(props: IFullDesignContainerProps) {
   const onDesignImageLoadComplete = () => {
     setIsLoading(false);
   };
-  const handleBuy=()=>{
-    console.log("handleBuy -> ");
-    
-  
-  }
-  const handleCartAdd=()=>{
-    console.log("handleCartAdd -> ")
-  
-  }
+  const handleAddtoCart = () => {
+    if (cartItems && cartItems.length) {
+      const alreadyInCart = cartItems.find(
+        (cartitem) => cartitem.fullPath.toLowerCase() === selectedFile.fullPath.toLowerCase()
+      );
+      if (alreadyInCart) {
+        return;
+      }
+    }
+    dispatch(AddToCart(selectedFile));
+  };
+  const handleBuy = () => {
+    handleAddtoCart();
+    navigate("/:cart");
+  };
+
   return (
     <div className="rd-fulldesign-container">
       <div className="rd-fulldesign-box">
@@ -54,7 +66,9 @@ export default function FullDesignContainer(props: IFullDesignContainerProps) {
         {selectedFile && selectedFile.designProps && (
           <DesignColorsContainer designColors={selectedFile.designProps.DesignColors} />
         )}
-        {selectedFile && (<CartOptions FullPath={selectedFile.fullPath} handleBuy= {handleBuy} handleCartAdd={handleCartAdd} />)}
+        {selectedFile && (
+          <CartOptions FullPath={selectedFile.fullPath} handleBuy={handleBuy} handleCartAdd={handleAddtoCart} />
+        )}
         {isLoading && (
           <div className="rd-LoadingOverlay">
             <img src={`${CDN_domain}/icons/loading.gif`} alt="loading gif" />

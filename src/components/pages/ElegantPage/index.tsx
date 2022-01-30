@@ -108,7 +108,7 @@ export default function ElegantPage(props: IElegantPageProps) {
   return (
     <div>
       <div className="rd-collection-container">
-        <Heading>Elegant Collection</Heading>
+        <Heading className='page-heading'>Elegant Collection</Heading>
         <div className="rd-categories-filters-area">
           {/* <TogglerButtons
             wrapperClassName="rd-collection-categories"

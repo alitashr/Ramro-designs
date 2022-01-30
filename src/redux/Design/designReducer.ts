@@ -29,7 +29,7 @@ const designReducer = (state: DesignState = initialState, action: Action) => {
 };
 
 function setDesignTree(state: DesignState, payload: any) {
-  const { selectedFolder, selectedFile, tree, designCarouselList } = payload;
+  const { tree, designCarouselList } = payload;
   return { ...state, tree, designCarouselList };
 }
 

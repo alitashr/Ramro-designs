@@ -18,8 +18,8 @@ export default function DesignCanvas (props: IDesignCanvasProps) {
       const getRenderedDesignProps = {
         fullpath: selectedFile.fullPath,
         designDetails: selectedFile.designProps,
-        Width: selectedFile.designProps.Width,
-        Height: selectedFile.designProps.Height,
+        Width: selectedFile.designProps?.Width,
+        Height: selectedFile.designProps?.Height,
         applyKLRatio: true,
         zoom: 1,
         hash: generateHash(selectedFile.designProps),
@@ -27,6 +27,7 @@ export default function DesignCanvas (props: IDesignCanvasProps) {
         KLRatio: selectedFile.designProps.KLRatio,
       };
       getRenderedDesign(getRenderedDesignProps).then((designCanvas: any) => {
+        if(!designCanvas) return;
         const canvas = document.getElementById("fulldesign-canvas") as HTMLCanvasElement;
         canvas.width = designCanvas.width;
         canvas.height = designCanvas.height;
